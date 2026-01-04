@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ClerkRouteRouteImport } from './routes/clerk/route'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedTableRouteImport } from './routes/_authenticated/table'
 import { Route as AuthenticatedRsRouteImport } from './routes/_authenticated/rs'
 import { Route as errors503RouteImport } from './routes/(errors)/503'
 import { Route as errors500RouteImport } from './routes/(errors)/500'
@@ -53,6 +54,11 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTableRoute = AuthenticatedTableRouteImport.update({
+  id: '/table',
+  path: '/table',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedRsRoute = AuthenticatedRsRouteImport.update({
@@ -217,6 +223,7 @@ export interface FileRoutesByFullPath {
   '/500': typeof errors500Route
   '/503': typeof errors503Route
   '/rs': typeof AuthenticatedRsRoute
+  '/table': typeof AuthenticatedTableRoute
   '/': typeof AuthenticatedIndexRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
@@ -246,6 +253,7 @@ export interface FileRoutesByTo {
   '/500': typeof errors500Route
   '/503': typeof errors503Route
   '/rs': typeof AuthenticatedRsRoute
+  '/table': typeof AuthenticatedTableRoute
   '/': typeof AuthenticatedIndexRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
@@ -280,6 +288,7 @@ export interface FileRoutesById {
   '/(errors)/500': typeof errors500Route
   '/(errors)/503': typeof errors503Route
   '/_authenticated/rs': typeof AuthenticatedRsRoute
+  '/_authenticated/table': typeof AuthenticatedTableRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/errors/$error': typeof AuthenticatedErrorsErrorRoute
   '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountRoute
@@ -312,6 +321,7 @@ export interface FileRouteTypes {
     | '/500'
     | '/503'
     | '/rs'
+    | '/table'
     | '/'
     | '/errors/$error'
     | '/settings/account'
@@ -341,6 +351,7 @@ export interface FileRouteTypes {
     | '/500'
     | '/503'
     | '/rs'
+    | '/table'
     | '/'
     | '/errors/$error'
     | '/settings/account'
@@ -374,6 +385,7 @@ export interface FileRouteTypes {
     | '/(errors)/500'
     | '/(errors)/503'
     | '/_authenticated/rs'
+    | '/_authenticated/table'
     | '/_authenticated/'
     | '/_authenticated/errors/$error'
     | '/_authenticated/settings/account'
@@ -427,6 +439,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/table': {
+      id: '/_authenticated/table'
+      path: '/table'
+      fullPath: '/table'
+      preLoaderRoute: typeof AuthenticatedTableRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/rs': {
@@ -654,6 +673,7 @@ const AuthenticatedSettingsRouteRouteWithChildren =
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsRouteRoute: typeof AuthenticatedSettingsRouteRouteWithChildren
   AuthenticatedRsRoute: typeof AuthenticatedRsRoute
+  AuthenticatedTableRoute: typeof AuthenticatedTableRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedErrorsErrorRoute: typeof AuthenticatedErrorsErrorRoute
   AuthenticatedAppsIndexRoute: typeof AuthenticatedAppsIndexRoute
@@ -666,6 +686,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSettingsRouteRoute: AuthenticatedSettingsRouteRouteWithChildren,
   AuthenticatedRsRoute: AuthenticatedRsRoute,
+  AuthenticatedTableRoute: AuthenticatedTableRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedErrorsErrorRoute: AuthenticatedErrorsErrorRoute,
   AuthenticatedAppsIndexRoute: AuthenticatedAppsIndexRoute,
