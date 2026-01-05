@@ -66,6 +66,18 @@ export const sidebarData: SidebarData = {
 
         },
         {
+          title: 'Table',
+          url: '/table',
+          icon: PersonStanding, // Choose an appropriate icon from lucide-react
+
+        },
+        {
+          title: 'Forms',
+          url: '/forms',
+          icon: PersonStanding, // Choose an appropriate icon from lucide-react
+
+        },
+        {
           title: 'Tasks',
           url: '/tasks',
           icon: ListTodo,

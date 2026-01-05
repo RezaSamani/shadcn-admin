@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as AuthenticatedTableRouteImport } from './routes/_authenticated/table'
 import { Route as AuthenticatedRsRouteImport } from './routes/_authenticated/rs'
+import { Route as AuthenticatedFormsRouteImport } from './routes/_authenticated/forms'
 import { Route as errors503RouteImport } from './routes/(errors)/503'
 import { Route as errors500RouteImport } from './routes/(errors)/500'
 import { Route as errors404RouteImport } from './routes/(errors)/404'
@@ -64,6 +65,11 @@ const AuthenticatedTableRoute = AuthenticatedTableRouteImport.update({
 const AuthenticatedRsRoute = AuthenticatedRsRouteImport.update({
   id: '/rs',
   path: '/rs',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedFormsRoute = AuthenticatedFormsRouteImport.update({
+  id: '/forms',
+  path: '/forms',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const errors503Route = errors503RouteImport.update({
@@ -222,6 +228,7 @@ export interface FileRoutesByFullPath {
   '/404': typeof errors404Route
   '/500': typeof errors500Route
   '/503': typeof errors503Route
+  '/forms': typeof AuthenticatedFormsRoute
   '/rs': typeof AuthenticatedRsRoute
   '/table': typeof AuthenticatedTableRoute
   '/': typeof AuthenticatedIndexRoute
@@ -252,6 +259,7 @@ export interface FileRoutesByTo {
   '/404': typeof errors404Route
   '/500': typeof errors500Route
   '/503': typeof errors503Route
+  '/forms': typeof AuthenticatedFormsRoute
   '/rs': typeof AuthenticatedRsRoute
   '/table': typeof AuthenticatedTableRoute
   '/': typeof AuthenticatedIndexRoute
@@ -287,6 +295,7 @@ export interface FileRoutesById {
   '/(errors)/404': typeof errors404Route
   '/(errors)/500': typeof errors500Route
   '/(errors)/503': typeof errors503Route
+  '/_authenticated/forms': typeof AuthenticatedFormsRoute
   '/_authenticated/rs': typeof AuthenticatedRsRoute
   '/_authenticated/table': typeof AuthenticatedTableRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
@@ -320,6 +329,7 @@ export interface FileRouteTypes {
     | '/404'
     | '/500'
     | '/503'
+    | '/forms'
     | '/rs'
     | '/table'
     | '/'
@@ -350,6 +360,7 @@ export interface FileRouteTypes {
     | '/404'
     | '/500'
     | '/503'
+    | '/forms'
     | '/rs'
     | '/table'
     | '/'
@@ -384,6 +395,7 @@ export interface FileRouteTypes {
     | '/(errors)/404'
     | '/(errors)/500'
     | '/(errors)/503'
+    | '/_authenticated/forms'
     | '/_authenticated/rs'
     | '/_authenticated/table'
     | '/_authenticated/'
@@ -453,6 +465,13 @@ declare module '@tanstack/react-router' {
       path: '/rs'
       fullPath: '/rs'
       preLoaderRoute: typeof AuthenticatedRsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/forms': {
+      id: '/_authenticated/forms'
+      path: '/forms'
+      fullPath: '/forms'
+      preLoaderRoute: typeof AuthenticatedFormsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/(errors)/503': {
@@ -672,6 +691,7 @@ const AuthenticatedSettingsRouteRouteWithChildren =
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsRouteRoute: typeof AuthenticatedSettingsRouteRouteWithChildren
+  AuthenticatedFormsRoute: typeof AuthenticatedFormsRoute
   AuthenticatedRsRoute: typeof AuthenticatedRsRoute
   AuthenticatedTableRoute: typeof AuthenticatedTableRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
@@ -685,6 +705,7 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSettingsRouteRoute: AuthenticatedSettingsRouteRouteWithChildren,
+  AuthenticatedFormsRoute: AuthenticatedFormsRoute,
   AuthenticatedRsRoute: AuthenticatedRsRoute,
   AuthenticatedTableRoute: AuthenticatedTableRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
