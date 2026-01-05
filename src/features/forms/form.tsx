@@ -5,6 +5,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
+  CardFooter
 } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ConfigDrawer } from '@/components/config-drawer'
@@ -15,8 +16,12 @@ import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
 import { Analytics} from './../dashboard/components/analytics'
-import { Overview } from './../dashboard/components/overview'
+import {Label} from "@/components/ui/label"    
+// import { Overview } from './../dashboard/components/overview'
 import { RecentSales } from './../dashboard/components/recent-sales'
+import { Input } from '@/components/ui/input'
+import { Import } from 'lucide-react'
+
 
 export function Form() {
   return (
@@ -162,13 +167,37 @@ export function Form() {
               </Card>
             </div>
             <div className='grid grid-cols-1 gap-4 lg:grid-cols-7'>
+           
               <Card className='col-span-1 lg:col-span-4'>
-                <CardHeader>
-                  <CardTitle>Overview</CardTitle>
-                </CardHeader>
-                <CardContent className='ps-2'>
-                  <Overview />
-                </CardContent>
+              <CardHeader>
+          <CardTitle className='text-lg tracking-tight'>Sign in</CardTitle>
+          <CardDescription>
+            Enter your email and password below to <br />
+            log into your account
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+         
+        </CardContent>
+        <CardFooter>
+          <p className='px-8 text-center text-sm text-muted-foreground'>
+            By clicking sign in, you agree to our{' '}
+            <a
+              href='/terms'
+              className='underline underline-offset-4 hover:text-primary'
+            >
+              Terms of Service
+            </a>{' '}
+            and{' '}
+            <a
+              href='/privacy'
+              className='underline underline-offset-4 hover:text-primary'
+            >
+              Privacy Policy
+            </a>
+            .
+          </p>
+        </CardFooter>
               </Card>
               <Card className='col-span-1 lg:col-span-3'>
                 <CardHeader>
